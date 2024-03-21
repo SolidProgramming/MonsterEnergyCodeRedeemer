@@ -24,11 +24,9 @@ bool loginSuccess = await Login();
 
 if (!loginSuccess)
     Exit();
-#endregion
-
-string html = await httpClient.GetStringAsync(Endpoints.Dashboard);
 
 await CheckClawPoints();
+#endregion
 
 #region Codes einlösen
 IEnumerable<string>? codes = GetCodes();
