@@ -5,17 +5,17 @@ namespace MonsterEnergyCodeRedeemer.Classes
 {
     internal class XPathQueryBuilder
     {
-        private List<HtmlNode> _nodes = new();
+        private List<HtmlNode>? _nodes = [];
 
         /// <summary>
         ///     Return all resulting nodes from the list
         /// </summary>
-        internal List<HtmlNode> Results => _nodes;
+        internal List<HtmlNode>? Results => _nodes;
 
         /// <summary>
         ///     Returns only the first node result from the list
         /// </summary>
-        internal HtmlNode Result
+        internal HtmlNode? Result
         {
             get
             {
@@ -24,16 +24,27 @@ namespace MonsterEnergyCodeRedeemer.Classes
                     return _nodes[0];
                 }
 
-                return null;
+                return default;
             }
         }
 
         internal XPathQueryBuilder Query(HtmlDocument doc)
         {
-            _nodes.Add(doc.DocumentNode);
+            _nodes?.Add(doc.DocumentNode);
 
             return this;
         }
+
+        internal XPathQueryBuilder Query(string html)
+        {
+            HtmlDocument doc = new();
+            doc.LoadHtml(html);
+
+            _nodes?.Add(doc.DocumentNode);
+
+            return this;
+        }
+
         internal XPathQueryBuilder Query(HtmlNode node)
         {
             _nodes.Add(node);
@@ -109,7 +120,7 @@ namespace MonsterEnergyCodeRedeemer.Classes
         }
         internal XPathQueryBuilder ByAttributeValues(string attributeName, List<string> attributeValues)
         {
-            List<HtmlNode> filteredNodes = new();
+            List<HtmlNode> filteredNodes = [];
             foreach (string attValue in attributeValues)
             {
                 string query = $".//*[@{attributeName}='{attValue}']";
@@ -123,7 +134,7 @@ namespace MonsterEnergyCodeRedeemer.Classes
         }
         internal List<HtmlNode> GetNodesByQuery(string query)
         {
-            List<HtmlNode> nodes = new();
+            List<HtmlNode> nodes = [];
 
             for (int i = 0; i < _nodes?.Count; i++)
             {

@@ -1,9 +1,13 @@
-﻿namespace MonsterEnergyCodeRedeemer.Models
+﻿using System.Text.Json.Serialization;
+
+namespace MonsterEnergyCodeRedeemer.Models
 {
-    internal class UserModel
+    public class UserModel
     {
-        internal string? Email { get; set; }
-        internal string? Password { get; set; }
-        internal string? CSRFToken { get; set; }
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
+
+        [JsonPropertyName("password")]
+        public string? Password { get; set; }
     }
 }
