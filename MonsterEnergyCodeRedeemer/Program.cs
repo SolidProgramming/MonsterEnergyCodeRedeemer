@@ -1,9 +1,11 @@
-﻿using HtmlAgilityPack;
+﻿#region Usings
+using HtmlAgilityPack;
 using MonsterEnergyCodeRedeemer.Classes;
 using MonsterEnergyCodeRedeemer.Misc;
 using MonsterEnergyCodeRedeemer.Models;
 using System.Text;
 using System.Text.Json;
+#endregion
 
 #region Init
 using HttpClient httpClient = new();
